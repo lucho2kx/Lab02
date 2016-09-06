@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bebidas">
+        <item>Coca</item>
+        <item>Jugo</item>
+        <item>Agua</item>
+        <item>Soda</item>
+        <item>Fernet</item>
+        <item>Vino</item>
+        <item>Cerveza</item>
+    </string-array>
+
+    <string-array name="platos">
+        <item>Ravioles</item>
+        <item>Gnocchi</item>
+        <item>Tallarines</item>
+        <item>Lomo</item>
+        <item>Entrecot</item>
+        <item>Pollo</item>
+        <item>Pechuga</item>
+        <item>Pizza</item>
+        <item>Empanadas</item>
+        <item>Milanesas</item>
+        <item>Picada 1</item>
+        <item>Picada 2</item>
+        <item>Hamburguesa</item>
+        <item>Calamares</item>
+    </string-array>
+
+    <string-array name="postres">
+        <item>Helados</item>
+        <item>Ensalada de Frutas</item>
+        <item>Macedonia</item>
+        <item>Brownie</item>
+        <item>Cheescake</item>
+        <item>Tiramisu</item>
+        <item>Mousse</item>
+        <item>Fondue</item>
+        <item>Profiterol</item>
+        <item>Selva Negra</item>
+        <item>Lemon Pie</item>
+        <item>KitKat</item>
+        <item>IceCreamSandwich</item>
+        <item>Frozen Yougurth</item>
+        <item>Queso y Batata</item>
+    </string-array>
+
+    <string-array name="horarios">
+        <item>20:00</item>
+        <item>20:30</item>
+        <item>21:00</item>
+        <item>21:30</item>
+        <item>22:00</item>
+        <item>22:30</item>
+    </string-array>
+
+</resources>

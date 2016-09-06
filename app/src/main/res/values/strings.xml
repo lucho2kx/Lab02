@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Lab02</string>
+    <string name="titulo">Pedite la cena!!</string>
+    <string name="toggle_reserva_mesa">RESERVAR MESA</string>
+    <string name="toggle_solicita_delivery">DELIVERY</string>
+    <string name="titulo_selec_horario">Seleccione el horario</string>
+    <string name="titulo_notificar_reserva">Notificar Reserva 1 hora antes</string>
+    <string name="datos_pedido">Lista del pedido:</string>
+
+    <string name="total">Total</string>
+    <string name="pedido_realizado">Pedido confirmado</string>
+
+    <string name="error_lista_vacia">Debe seleccionar algo del menu</string>
+    <string name="error_confirmacion">Ya ha confirmado el pedido</string>
+
+    <string name="rdb_bebida">Bebida</string>
+    <string name="rdb_plato">Plato</string>
+    <string name="rdb_postre">Postre</string>
+
+    <string name="button_agregar">AGREGAR</string>
+    <string name="button_confirmar">CONFIRMAR PEDIDO</string>
+    <string name="button_reiniciar">REINICIAR</string>
+
+
+</resources>
