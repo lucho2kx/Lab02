@@ -78,6 +78,22 @@ public class MenuAdapter extends BaseAdapter {
             viewHolder.nombre= (TextView) convertView.findViewById(R.id.textView_elemento_descripcion);
             viewHolder.rdb_seleccionado= (RadioButton) convertView.findViewById(R.id.radioButton_elemento);
 
+            viewHolder.rdb_seleccionado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RadioButton rdb= (RadioButton) v;
+                    boolean b= !seleccionados.get(position);
+                    rdb.setChecked(!b);
+                    seleccionados.put(position, b);
+                    if (b)
+                        onItemClickListener.onItemClickCheck(elementos.get(position));
+                    else
+                        onItemClickListener.onItemClickUnCheck(elementos.get(position));
+
+                    notifyDataSetChanged();
+                }
+            });
+
             //Selecciona el objeto si estaba seleccionado
             if (seleccionados.get(position)) {
                 viewHolder.layout.setSelected(true);
@@ -95,22 +111,6 @@ public class MenuAdapter extends BaseAdapter {
 
         viewHolder.nombre.setText(elementos.get(position).toString());
         viewHolder.rdb_seleccionado.setChecked(seleccionados.get(position));
-
-        viewHolder.rdb_seleccionado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RadioButton rdb= (RadioButton) v;
-                boolean b= !seleccionados.get(position);
-                rdb.setChecked(!b);
-                seleccionados.put(position, b);
-                if (b)
-                    onItemClickListener.onItemClickCheck(elementos.get(position));
-                else
-                    onItemClickListener.onItemClickUnCheck(elementos.get(position));
-
-                notifyDataSetChanged();
-             }
-        });
 
         return convertView;
     }

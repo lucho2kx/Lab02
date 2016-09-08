@@ -21,6 +21,7 @@ public class MainPresenter implements IMainPresenter {
     private HorarioService horarioService;
     private IMainView view;
     private boolean confirmado= false;
+    private boolean agregado= false;
     private ArrayList<ElementoMenu> listaPlatos= null;
     private ArrayList<ElementoMenu> listaPostres= null;
     private ArrayList<ElementoMenu> listaBebidas= null;
@@ -38,8 +39,10 @@ public class MainPresenter implements IMainPresenter {
         }
         else {
             if (elementoMenus.size() > 0) {
+                agregado= true;
                 view.showListaPedidos(elementoMenus);
             } else {
+                agregado= false;
                 view.clearListaPedidos();
                 view.showMensaje(view.getContext().getResources().getString(R.string.error_lista_vacia));
             }
@@ -48,40 +51,43 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void onClickConfirmar(Boolean reserva_delivery, String horario, Boolean notificar_reserva, ArrayList<ElementoMenu> elementoMenus) {
-        if (confirmado) {
-            view.showMensaje(view.getContext().getResources().getString(R.string.error_confirmacion));
+        if (agregado) {
+            if (confirmado) {
+                view.showMensaje(view.getContext().getResources().getString(R.string.error_confirmacion));
+            } else {
+                if (elementoMenus.size() > 0) {
+                    // Se crea el pedido
+                    Pedido pedido = new Pedido();
+                    pedido.setReserva_delivery(reserva_delivery);
+                    pedido.setHorario(horario);
+                    pedido.setNotificarReserva(notificar_reserva);
+                    pedido.setLista(elementoMenus);
+                    Log.i("onClickConfirmar()", "reserva_delivery=" + reserva_delivery.toString());
+                    Log.i("onClickConfirmar()", "horario=" + horario.toString());
+                    Log.i("onClickConfirmar()", "notificar_reserva=" + notificar_reserva.toString());
+                    Log.i("onClickConfirmar()", "elementoMenus.size()=" + elementoMenus.size());
+
+                    // Se confirma el pedido
+                    pedidoService.confirmarPedido(pedido, new PedidoService.MenuServiceCallBack() {
+                        @Override
+                        public void onError(String msg) {
+                            view.showMensaje(msg);
+                        }
+
+                        @Override
+                        public void onSuccess(Double montoTotal) {
+                            confirmado = true;
+                            view.confirmedPedido(montoTotal);
+                            view.showMensaje(view.getContext().getResources().getString(R.string.pedido_realizado));
+                        }
+                    });
+                } else {
+                    view.showMensaje(view.getContext().getResources().getString(R.string.error_lista_vacia));
+                }
+            }
         }
         else {
-            if (elementoMenus.size() > 0) {
-                // Se crea el pedido
-                Pedido pedido= new Pedido();
-                pedido.setReserva_delivery(reserva_delivery);
-                pedido.setHorario(horario);
-                pedido.setNotificarReserva(notificar_reserva);
-                pedido.setLista(elementoMenus);
-                Log.i("onClickConfirmar()","reserva_delivery="+reserva_delivery.toString());
-                Log.i("onClickConfirmar()","horario="+horario.toString());
-                Log.i("onClickConfirmar()","notificar_reserva="+notificar_reserva.toString());
-                Log.i("onClickConfirmar()","elementoMenus.size()="+elementoMenus.size());
-
-                // Se confirma el pedido
-                pedidoService.confirmarPedido(pedido, new PedidoService.MenuServiceCallBack() {
-                    @Override
-                    public void onError(String msg) {
-                        view.showMensaje(msg);
-                    }
-
-                    @Override
-                    public void onSuccess(Double montoTotal) {
-                        confirmado= true;
-                        view.confirmedPedido(montoTotal);
-                        view.showMensaje(view.getContext().getResources().getString(R.string.pedido_realizado));
-                    }
-                });
-            }
-            else {
-                view.showMensaje(view.getContext().getResources().getString(R.string.error_lista_vacia));
-            }
+            view.showMensaje(view.getContext().getResources().getString(R.string.error_agregar));
         }
     }
 
@@ -91,6 +97,7 @@ public class MainPresenter implements IMainPresenter {
             view.showMensaje(view.getContext().getResources().getString(R.string.error_confirmacion));
         }
         else {
+            agregado= false;
             view.reiniciar();
         }
     }

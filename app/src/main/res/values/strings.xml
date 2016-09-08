@@ -12,6 +12,7 @@
 
     <string name="error_lista_vacia">Debe seleccionar algo del menu</string>
     <string name="error_confirmacion">Ya ha confirmado el pedido</string>
+    <string name="error_agregar">Debe primero agregar algo del menu a la lista para confirmar</string>
 
     <string name="rdb_bebida">Bebida</string>
     <string name="rdb_plato">Plato</string>
